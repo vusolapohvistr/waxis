@@ -7,11 +7,15 @@ async function getExchangeRate() {
         return `${days.getDate()}.${days.getMonth()}.${days.getFullYear()}`;
     });
     let requests = [];
-    for (let date of dates) {
-        requests.push(axios.get('https://api.privatbank.ua/p24api/exchange_rates?json&date=' + date))
+    try {
+        for (let date of dates) {
+            requests.push(axios.get('https://api.privatbank.ua/p24api/exchange_rates?json&date=' + date))
+        }
+        const exchangeRates = (await Promise.all(requests)).map(res => res.data);
+    } catch (e) {
+        throw e;
     }
-    const exchangeRates = (await Promise.all(requests)).map(res => res.data);
     return exchangeRates;
 }
 
-getExchangeRate();
+getExchangeRate().then(res => console.log(res)).catch(err => console.log(err.message));

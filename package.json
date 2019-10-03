@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "createDB": "node createDB.js",
-    "getusers": "node getUsers.js"
+    "getusers": "node getUsers.js",
+    "getex": "node getExchangeRate.js"
   },
   "author": "",
   "license": "ISC",

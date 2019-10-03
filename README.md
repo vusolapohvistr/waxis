@@ -12,3 +12,6 @@ npm run createdb
 
 npm run getusers
 
+**get exchange rate**
+
+npm run getex
