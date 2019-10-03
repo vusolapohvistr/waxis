@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>W-Axis Test</title>
+    <script>
+        // У меня было несколько вариантов решения задания 1, я выбрал вариант в котором делаю функцию которая добавляет пропу
+        function makeDelayProp(func) {
+            if (func.hasOwnProperty('delay')) throw new Error('Function already has property \'Delay\'');
+            else {
+                func.delay = (delay) => setTimeout(func, delay);
+            }
+        }
+
+        const foo = function () {
+            alert('Bingo!')
+        };
+
+        function bar() {
+            alert('Wow!');
+        }
+
+        makeDelayProp(foo);
+        makeDelayProp(bar);
+
+        foo.delay(500);
+        bar.delay(1000);
+    </script>
+</head>
+<body>
+    <button id="counter">Click me (0)</button>
+    <script>
+        const getButtonCounterEventListener = function () {
+            let counter = 0;
+            return function listener(e) {
+                if (counter === 3) {
+                    e.target.removeEventListener('click', listener);
+                } else {
+                    counter++;
+                    e.target.innerText = `Click me (${counter})`;
+                }
+            };
+        };
+        document.getElementById('counter').addEventListener('click', getButtonCounterEventListener());
+    </script>
+</body>
+</html>
