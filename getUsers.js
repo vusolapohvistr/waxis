@@ -12,10 +12,14 @@ function getUsers() {
 
         con.connect(err => {
             if (err) {
+                con.end();
                 reject(err);
             } else {
                 con.query('SELECT id, username, email FROM users ORDER BY id DESC LIMIT 10', (err, value) => {
-                    if (err) reject(err);
+                    if (err) {
+                        con.end();
+                        reject(err);
+                    }
                     else {
                         resolve(value);
                     }
